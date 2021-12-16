@@ -175,10 +175,10 @@ def draw_bbox(image, bboxes, classes=read_class_names(cfg.YOLO.CLASSES),
                 detection.remove((x_center, y_center))
                 num_Without_Helmet += 1  # บวกค่า num_up
                 num_WithoutHelmet = num_Without_Helmet
-                WithHelmet =  "{With Helmet"':' +str(num_With_Helmet)+""
-                WithoutHelmet = "Without Helmet"':'+str(num_Without_Helmet)+"}"
+                WithHelmet =  "With Helmet"':' +str(num_With_Helmet)+""
+                WithoutHelmet = "Without Helmet"':'+str(num_Without_Helmet)+""
                 print('Without 1')
-                withouthelmet.append(WithHelmet,WithoutHelmet) 
+                withouthelmet.append([WithHelmet,WithoutHelmet]) 
                 with open("D:\OneDrive\Desktop\webpagetestgrahp\static\dection.json","w") as json_file:
                     json.dump(withouthelmet, json_file)
                
