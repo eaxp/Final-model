@@ -6,6 +6,7 @@ import numpy as np
 import tensorflow as tf
 from core.config import cfg
 import json
+import datetime
 
 num_With_Helmet = 0
 num_Without_Helmet = 0
@@ -13,8 +14,9 @@ num_WithHelmet = int()
 num_WithoutHelmet = int()
 withouthelmet = []
 withhelmet = []
-
+dic01 = []
 detection = []
+num_id = 1
 
 
 # Zone Up Down
@@ -94,6 +96,8 @@ def draw_bbox(image, bboxes, classes=read_class_names(cfg.YOLO.CLASSES),
     global num_WithoutHelmet 
     global withouthelmet 
     global withhelmet 
+    global dic01
+    global num_id
 
     out_boxes, out_scores, out_classes, num_boxes = bboxes
 
@@ -158,30 +162,53 @@ def draw_bbox(image, bboxes, classes=read_class_names(cfg.YOLO.CLASSES),
             C = str(bbox_mess) 
             gethelmet = {} 
             getnothelmet = {}
+            date = datetime.datetime.now()
+            num_date = str(date.day) +"/" + str(date.month) + "/" +str(date.year)
             if  A in C:
                 cv2.rectangle(image, (x_up_start, y_up_start), (x_up_end, y_up_end), (208, 233, 40), -1)
                 detection.remove((x_center, y_center))
                 num_With_Helmet += 1  # บวกค่า num_up
                 num_WithHelmet = num_With_Helmet
-                WithHelmet = "With Helmet"':' +str(num_With_Helmet)+""
-                WithoutHelmet = "Without Helmet"':'+str(num_Without_Helmet)+""
-                print('With Helmet 1')
-                withhelmet.append([WithHelmet,WithoutHelmet])
+                #WithHelmet = "With Helmet"':' +str(num_With_Helmet)+""
+                #WithoutHelmet = "Without Helmet"':'+str(num_Without_Helmet)+""
+                #withhelmet.append([WithHelmet,WithoutHelmet])
+                num_sum = num_With_Helmet + num_Without_Helmet
+                dictionary ={
+                    "date" : str(num_date),
+                    "With Helmet" : str(num_With_Helmet),
+                    "Without Helmet" : str(num_Without_Helmet),
+                    "Sum" : str(num_sum)
+                }
+                dic01.append(dictionary)
+                print("With Helmet = "+str(num_WithHelmet))
+                print("Without Helmet = "+str(num_WithoutHelmet)) 
+                print("-----------------------------------------")
                 with open("D:\OneDrive\Desktop\webpagetestgrahp\static\dection.json","w") as json_file:
-                    json.dump(withhelmet, json_file)
+                    json.dump(dic01, json_file)
+                num_id += 1    
                
             elif  B in C :
                 cv2.rectangle(image, (x_up_start, y_up_start), (x_up_end, y_up_end), (208, 233, 40), -1)
                 detection.remove((x_center, y_center))
                 num_Without_Helmet += 1  # บวกค่า num_up
                 num_WithoutHelmet = num_Without_Helmet
-                WithHelmet =  "With Helmet"':' +str(num_With_Helmet)+""
-                WithoutHelmet = "Without Helmet"':'+str(num_Without_Helmet)+""
-                print('Without 1')
-                withouthelmet.append([WithHelmet,WithoutHelmet]) 
+                #WithHelmet =  "With Helmet"':' +str(num_With_Helmet)+""
+                #WithoutHelmet = "Without Helmet"':'+str(num_Without_Helmet)+""
+                #withouthelmet.append([WithHelmet,WithoutHelmet])
+                num_sum = num_With_Helmet + num_Without_Helmet
+                dictionary ={
+                    "date" : str(num_date),
+                    "With Helmet" : str(num_With_Helmet),
+                    "Without Helmet" : str(num_Without_Helmet),
+                    "Sum" : str(num_sum)
+                }
+                dic01.append(dictionary)
+                print("With Helmet = "+str(num_WithHelmet))
+                print("Without Helmet = "+str(num_WithoutHelmet)) 
+                print("-----------------------------------------")  
                 with open("D:\OneDrive\Desktop\webpagetestgrahp\static\dection.json","w") as json_file:
-                    json.dump(withouthelmet, json_file)
-               
+                    json.dump(dic01, json_file)
+                num_id += 1
     
     #cv2.rectangle(image, (20, 410), (400, 445), (255, 255, 255), -1) 
     cv2.putText(image, "with  : " + str(num_WithHelmet), (30, 450),cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 1)
