@@ -19,10 +19,10 @@ detection = []
 num_id = 1
 
 
-# Zone Up Down
-x_up_start = 500    #500
+# Zone Up Down      #ค่าเดิม
+x_up_start = 730    #500
 y_up_start = 0      #0
-x_up_end = 505     #505
+x_up_end = 738      #505
 y_up_end = 600      #600
 
 
@@ -175,15 +175,15 @@ def draw_bbox(image, bboxes, classes=read_class_names(cfg.YOLO.CLASSES),
                 num_sum = num_With_Helmet + num_Without_Helmet
                 dictionary ={
                     "date" : str(num_date),
-                    "With Helmet" : str(num_With_Helmet),
-                    "Without Helmet" : str(num_Without_Helmet),
-                    "Sum" : str(num_sum)
+                    "withhelmet" : int(num_With_Helmet),
+                    "withouthelmet" : int(num_Without_Helmet),
+                    "Sum" : int(num_sum)
                 }
                 dic01.append(dictionary)
                 print("With Helmet = "+str(num_WithHelmet))
                 print("Without Helmet = "+str(num_WithoutHelmet)) 
                 print("-----------------------------------------")
-                with open("D:\OneDrive\Desktop\webpagetestgrahp\static\dection.json","w") as json_file:
+                with open("D:\OneDrive\Desktop\webpagetestgrahp\static\detection.json","w") as json_file:
                     json.dump(dic01, json_file)
                 num_id += 1    
                
@@ -198,15 +198,15 @@ def draw_bbox(image, bboxes, classes=read_class_names(cfg.YOLO.CLASSES),
                 num_sum = num_With_Helmet + num_Without_Helmet
                 dictionary ={
                     "date" : str(num_date),
-                    "With Helmet" : str(num_With_Helmet),
-                    "Without Helmet" : str(num_Without_Helmet),
-                    "Sum" : str(num_sum)
+                    "withhelmet" : int(num_With_Helmet),
+                    "withouthelmet" : int(num_Without_Helmet),
+                    "Sum" : int(num_sum)
                 }
                 dic01.append(dictionary)
                 print("With Helmet = "+str(num_WithHelmet))
                 print("Without Helmet = "+str(num_WithoutHelmet)) 
                 print("-----------------------------------------")  
-                with open("D:\OneDrive\Desktop\webpagetestgrahp\static\dection.json","w") as json_file:
+                with open("D:\OneDrive\Desktop\webpagetestgrahp\static\detection.json","w") as json_file:
                     json.dump(dic01, json_file)
                 num_id += 1
     
